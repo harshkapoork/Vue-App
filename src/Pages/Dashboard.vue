@@ -94,17 +94,7 @@
             </div>
             <!-- table for the task -->
             <!-- /.card-body -->
-            <div class="card-footer clearfix">
-              <ul class="pagination pagination-sm m-0 float-right">
-                <li class="page-item">
-                  <button class="page-link" @click="pageback">&laquo;Prev</button>
-                </li>
-
-                <li class="page-item">
-                  <button class="page-link" @click="pagenext">Next&raquo;</button>
-                </li>
-              </ul>
-            </div>
+            <div class="card-footer clearfix"></div>
           </div>
           <!-- /.card -->
         </div>
