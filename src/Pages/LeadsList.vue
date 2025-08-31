@@ -33,41 +33,46 @@
             </div>
             <!-- table for the task -->
             <div class="card-body">
-              <table v-if="tasks.values.length == 0" class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>UserId</th>
-                    <th>Name</th>
-                    <th>Company</th>
-                    <th style="width: 10px">Contact</th>
-                    <th style="">Budget</th>
-                    <th style="width: 10px">Status</th>
-                    <th colspan="2" style="width: 10px">Action</th>
-                  </tr>
-                </thead>
-                <tbody v-if="isloading">
-                  <td
-                    colspan="8"
-                    style="
-                      height: 200px;
-                      align-items: center;
-                      text-align: center;
-                      justify-content: center;
-                      background-color: aliceblue;
-                    "
-                  >
-                    <h5>Loading...</h5>
-                  </td>
-                </tbody>
-                <tbody v-for="task in tasks">
-                  <tr>
-                    <td style="width: 1%">{{ task.id }}</td>
-                    <td style="width: 10%">{{ task.name }}</td>
-                    <td style="width: 10%">{{ task.company }}</td>
-                    <td style="width: 6%">{{ task.contact }}</td>
-                    <td style="width: 3%">{{ task.budget }}</td>
-                    <td style="width: 6%">{{ task.status }}</td>
-                    <!-- <td style="width: 30%;">
+              <div class="table-responsive" style="max-height: 100vh; overflow-y: auto">
+                <table
+                  v-if="tasks.values.length == 0"
+                  class="table table-bordered overflow-auto"
+                  style="max-height: 100vh"
+                >
+                  <thead>
+                    <tr>
+                      <th>UserId</th>
+                      <th>Name</th>
+                      <th>Company</th>
+                      <th style="width: 10px">Contact</th>
+                      <th style="">Budget</th>
+                      <th style="width: 10px">Status</th>
+                      <th colspan="2" style="width: 10px">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody v-if="isloading">
+                    <td
+                      colspan="8"
+                      style="
+                        height: 200px;
+                        align-items: center;
+                        text-align: center;
+                        justify-content: center;
+                        background-color: aliceblue;
+                      "
+                    >
+                      <h5>Loading...</h5>
+                    </td>
+                  </tbody>
+                  <tbody v-for="task in tasks">
+                    <tr>
+                      <td style="width: 1%">{{ task.id }}</td>
+                      <td style="width: 10%">{{ task.name }}</td>
+                      <td style="width: 10%">{{ task.company }}</td>
+                      <td style="width: 6%">{{ task.contact }}</td>
+                      <td style="width: 3%">{{ task.budget }}</td>
+                      <td style="width: 6%">{{ task.status }}</td>
+                      <!-- <td style="width: 30%;">
                         <div class="progress progress-xs progress-striped active">
                           <div class="progress-bar bg-danger" style="width: 10%"></div>
                         </div>
@@ -75,35 +80,36 @@
                       </td>
                      -->
 
-                    <td :id="task.id" style="width: 1%" class="editTask">
-                      <button :id="task.id" @click="editTask" class="btn btn-light">
-                        <i :id="task.id" class="fas fa-edit"></i>
-                      </button>
-                    </td>
-
-                    <td style="width: 1%" class="deleteTask">
-                      <router-link class="" to="/leads">
-                        <button @click="handgleDelete(task.id)" class="btn btn-light">
-                          <i class="fas fa-trash"></i>
+                      <td :id="task.id" style="width: 1%" class="editTask">
+                        <button :id="task.id" @click="editTask" class="btn btn-light">
+                          <i :id="task.id" class="fas fa-edit"></i>
                         </button>
-                      </router-link>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <!-- table for the task -->
-            <!-- /.card-body -->
-            <div class="card-footer clearfix">
-              <ul class="pagination pagination-sm m-0 float-right">
-                <li class="page-item">
-                  <button class="page-link" @click="pageback">&laquo;Prev</button>
-                </li>
+                      </td>
 
-                <li class="page-item">
-                  <button class="page-link" @click="pagenext">Next&raquo;</button>
-                </li>
-              </ul>
+                      <td style="width: 1%" class="deleteTask">
+                        <router-link class="" to="/leads">
+                          <button @click="handgleDelete(task.id)" class="btn btn-light">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </router-link>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- table for the task -->
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                  <li class="page-item">
+                    <button class="page-link" @click="pageback">&laquo;Prev</button>
+                  </li>
+
+                  <li class="page-item">
+                    <button class="page-link" @click="pagenext">Next&raquo;</button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
           <!-- /.card -->
