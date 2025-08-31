@@ -2,6 +2,7 @@ import Home from '../Pages/Home.vue'
 import LeadsList from '@/Pages/LeadsList.vue'
 import Addlead from '@/Pages/AddLeads.vue'
 import EditLead from '@/Pages/EditLeads.vue'
+import ErrorPage from '@/Pages/ErrorPage.vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -12,6 +13,7 @@ const router = createRouter({
     { path: '/leads', component: LeadsList },
     { path: '/leads/add', component: Addlead },
     { path: '/leads/edit:id', component: EditLead },
+    { path: '/:pathMatch(.*)*', component: ErrorPage },
   ],
 })
 
