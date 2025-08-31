@@ -33,7 +33,7 @@
                     <div class="icon">
                       <i class="ion ion-stats-bars"></i>
                     </div>
-                    <RouterLink to="/task" class="small-box-footer"
+                    <RouterLink to="/leads" class="small-box-footer"
                       >More info <i class="fas fa-arrow-circle-right"></i
                     ></RouterLink>
                   </div>
@@ -51,7 +51,7 @@
                     <div class="icon">
                       <i class="ion ion-person-add"></i>
                     </div>
-                    <RouterLink to="/task" class="small-box-footer"
+                    <RouterLink to="/leads" class="small-box-footer"
                       >More info <i class="fas fa-arrow-circle-right"></i
                     ></RouterLink>
                   </div>
@@ -68,7 +68,7 @@
                     <div class="icon">
                       <i class="ion ion-stats-bars"></i>
                     </div>
-                    <RouterLink to="/task" class="small-box-footer"
+                    <RouterLink to="/leads" class="small-box-footer"
                       >More info <i class="fas fa-arrow-circle-right"></i
                     ></RouterLink>
                   </div>
@@ -85,7 +85,7 @@
                     <div class="icon">
                       <i class="ion ion-person-add"></i>
                     </div>
-                    <RouterLink to="/task" class="small-box-footer"
+                    <RouterLink to="/leads" class="small-box-footer"
                       >More info <i class="fas fa-arrow-circle-right"></i
                     ></RouterLink>
                   </div>

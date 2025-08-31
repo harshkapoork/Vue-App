@@ -1,5 +1,11 @@
 <script setup>
+import { ref } from 'vue'
 import { RouterView } from 'vue-router'
+
+//page title
+const PageName = ref('Page here')
+const TitleName = ref('Title here')
+const CompanyName = 'Company'
 </script>
 
 <template>
@@ -15,10 +21,7 @@ import { RouterView } from 'vue-router'
           ></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="../../index3.html" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contact</a>
+          <RouterLink to="/" class="nav-link">Home</RouterLink>
         </li>
       </ul>
 
@@ -52,9 +55,9 @@ import { RouterView } from 'vue-router'
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <RouterLink class="nav-link" data-widget="fullscreen" to="/" role="button">
             <i class="fas fa-expand-arrows-alt"></i>
-          </a>
+          </RouterLink>
         </li>
       </ul>
     </nav>
@@ -63,31 +66,20 @@ import { RouterView } from 'vue-router'
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="../../index3.html" class="brand-link">
+      <RouterLink to="/" class="brand-link">
         <img
-          src="/public/img/AdminLTELogo.png"
+          src="/img/AdminLTELogo.png"
           alt="AdminLTE Logo"
           class="brand-image img-circle elevation-3"
           style="opacity: 0.8"
         />
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
-      </a>
+        <span class="brand-text font-weight-light">{{ CompanyName }}</span>
+      </RouterLink>
 
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar user (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img
-              src="/public/img/user1-128x128.jpg"
-              class="img-circle elevation-2"
-              alt="User Image"
-            />
-          </div>
-          <div class="info">
-            <a href="#" class="d-block">Alexander Pierce</a>
-          </div>
-        </div>
+
         <!-- Sidebar Menu -->
 
         <!-- /.sidebar-menu -->
@@ -102,9 +94,9 @@ import { RouterView } from 'vue-router'
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Collapsed Sidebar</h1>
+              <h1>{{ PageName }}</h1>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 d-none">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Layout</a></li>
@@ -124,7 +116,7 @@ import { RouterView } from 'vue-router'
               <!-- Default box -->
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Title</h3>
+                  <h3 class="card-title">{{ TitleName }}</h3>
 
                   <div class="card-tools">
                     <button
@@ -145,9 +137,11 @@ import { RouterView } from 'vue-router'
                     </button>
                   </div>
                 </div>
-                <div class="card-body">Start creating your amazing application!</div>
+                <div class="card-body">
+                  <RouterView />
+                </div>
                 <!-- /.card-body -->
-                <div class="card-footer">Footer</div>
+                <div class="card-footer"></div>
                 <!-- /.card-footer-->
               </div>
               <!-- /.card -->
