@@ -1,4 +1,4 @@
-import Home from '@/Pages/Home.vue'
+import Home from '../Pages/Home.vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
 
