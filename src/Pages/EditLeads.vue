@@ -129,7 +129,7 @@ const updateForm = async () => {
       form.value,
     )
     successMessage.value = 'Client info updated successfully!'
-    console.log('Updated:', response.data)
+
     setTimeout(() => {
       successMessage.value = ''
     }, 1200)

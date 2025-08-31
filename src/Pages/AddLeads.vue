@@ -114,7 +114,7 @@ const submitForm = async () => {
     setTimeout(() => {
       successMessage.value = ''
     }, 1500)
-    console.log('Response:', response.data)
+
     form.value = {
       name: '',
       company: '',

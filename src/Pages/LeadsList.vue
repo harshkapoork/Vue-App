@@ -12,16 +12,8 @@
                 >
               </h3>
             </div>
-            <div class="card-footer clearfix d-none">
-              <ul class="pagination pagination-sm m-0 float-right">
-                <li class="page-item">
-                  <button class="page-link" @click="pageback">&laquo;</button>
-                </li>
-
-                <li class="page-item">
-                  <button class="page-link" @click="pagenext">&raquo;</button>
-                </li>
-              </ul>
+            <div class="card-footer clearfix">
+              <ul class="pagination pagination-sm m-0 float-right"></ul>
             </div>
             <!-- /.card-header -->
             <div v-if="successMessage" class="alert alert-success mt-3">
@@ -64,7 +56,7 @@
                       <h5>Loading...</h5>
                     </td>
                   </tbody>
-                  <tbody v-for="task in tasks">
+                  <tbody v-for="task in tasks.slice(index, page)">
                     <tr>
                       <td style="width: 1%">{{ task.id }}</td>
                       <td style="width: 10%">{{ task.name }}</td>
@@ -144,6 +136,14 @@ const id = ref('')
 const successMessage = ref('')
 const errorMessage = ref('')
 
+//table paging
+// Number of Table Coloum//
+
+//
+const PageList = 5 //number of col in the table'
+//
+const page = ref(PageList)
+const index = ref(0)
 //
 
 //function on render
@@ -168,17 +168,17 @@ const fetchLeads = async () => {
 
 //paging button
 const pagenext = () => {
-  console.log(tasks.value.length)
-  if (page.value == tasks.value.length - 6) {
-    page.value = page.value + 5
+  if (page.value >= tasks.value.length) {
   } else {
-    alert('no more data')
+    index.value = index.value + PageList
+    page.value = page.value + PageList
   }
 }
 const pageback = () => {
-  if (page.value >= 5) {
-    page.value = page.value - 5
+  if (index.value <= 0) {
   } else {
+    index.value = index.value - PageList
+    page.value = page.value - PageList
   }
 }
 //

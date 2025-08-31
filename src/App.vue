@@ -1,11 +1,37 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { RouterView } from 'vue-router'
 
 //page title
-const PageName = ref('Page here')
-const TitleName = ref('Title here')
-const CompanyName = 'Company'
+
+const TitleName = ref('')
+const CompanyName = 'Leads'
+
+//
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+const PageName = ref('Dashboard')
+let path = ref(['/'])
+
+watch(
+  () => route.fullPath,
+
+  (newPath) => {
+    if (newPath === '/') {
+      PageName.value = ' Dashboard'
+    } else if (newPath === '/leads') {
+      PageName.value = 'Lead List'
+    } else if (newPath === '/leads/add') {
+      PageName.value = 'Add Lead'
+    } else if (newPath.slice(6, length - 2) === '/edit') {
+      PageName.value = 'Edit Lead'
+    } else {
+      PageName.value = '404 Page not Found'
+    }
+  },
+)
 </script>
 
 <template>
@@ -144,11 +170,11 @@ const CompanyName = 'Company'
             <div class="col-sm-6">
               <h1>{{ PageName }}</h1>
             </div>
-            <div class="col-sm-6 d-none">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Layout</a></li>
-                <li class="breadcrumb-item active">Collapsed Sidebar</li>
+            <div class="col-sm-6">
+              <ol v-for="path in path" class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item">
+                  <RouterLink :to="path">{{ path }}</RouterLink>
+                </li>
               </ol>
             </div>
           </div>

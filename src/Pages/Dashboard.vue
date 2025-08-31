@@ -6,17 +6,7 @@
         <div class="col">
           <div class="card">
             <div class="card-header"></div>
-            <div class="card-footer clearfix d-none">
-              <ul class="pagination pagination-sm m-0 float-right">
-                <li class="page-item">
-                  <button class="page-link" @click="pageback">&laquo;</button>
-                </li>
 
-                <li class="page-item">
-                  <button class="page-link" @click="pagenext">&raquo;</button>
-                </li>
-              </ul>
-            </div>
             <!-- /.card-header -->
 
             <!--Dashboard of Leads -->
