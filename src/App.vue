@@ -79,7 +79,55 @@ const CompanyName = 'Company'
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar user (optional) -->
-
+        <nav class="mt-2">
+          <ul
+            class="nav nav-pills nav-sidebar flex-column"
+            data-widget="treeview"
+            role="menu"
+            data-accordion="false"
+          >
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+            <li class="nav-item">
+              <a class="nav-link active">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Admin
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <RouterLink to="/" class="nav-link">
+                    <i class="fas fa-tachometer-alt nav-icon"></i>
+                    <p>Dashboard</p>
+                  </RouterLink>
+                </li>
+                <li class="nav-item">
+                  <RouterLink to="/leads" class="nav-link">
+                    <i class="fas fa-book nav-icon"></i>
+                    <p>Leads</p>
+                  </RouterLink>
+                </li>
+                <li class="nav-item">
+                  <RouterLink to="/leads/add" class="nav-link">
+                    <i class="fas fa-pen nav-icon"></i>
+                    <p>Add Leads</p>
+                  </RouterLink>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link d-none">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Widgets
+                  <span class="right badge badge-danger">New</span>
+                </p>
+              </a>
+            </li>
+          </ul>
+        </nav>
         <!-- Sidebar Menu -->
 
         <!-- /.sidebar-menu -->
