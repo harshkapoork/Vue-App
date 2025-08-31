@@ -55,7 +55,7 @@
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Status</label>
+                <label class="form-label btn">Status</label>
                 <select v-model="form.status" class="form-select" required>
                   <option value="Pending">Pending</option>
                   <option value="Approved">Approved</option>
@@ -108,7 +108,7 @@ onMounted(async () => {
         form.value = res.data
       })
   } catch (error) {
-    alert('no data')
+    alert(' network error or no data')
   }
 })
 

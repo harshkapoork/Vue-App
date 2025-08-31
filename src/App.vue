@@ -13,22 +13,23 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 
 const PageName = ref('Dashboard')
-let path = ref(['/'])
+let path = ref([''])
 
 watch(
   () => route.fullPath,
 
   (newPath) => {
+    // console.log(newPath.split(':', 1))
     if (newPath === '/') {
       PageName.value = ' Dashboard'
     } else if (newPath === '/leads') {
       PageName.value = 'Lead List'
     } else if (newPath === '/leads/add') {
       PageName.value = 'Add Lead'
-    } else if (newPath.slice(6, length - 2) === '/edit') {
+    } else if (newPath.split(':', 1)[0] === '/leads/edit') {
       PageName.value = 'Edit Lead'
     } else {
-      PageName.value = '404 Page not Found'
+      PageName.value = ''
     }
   },
 )

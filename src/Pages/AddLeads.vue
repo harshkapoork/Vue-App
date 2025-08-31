@@ -36,26 +36,49 @@
             <form @submit.prevent="submitForm" class="p-3 mx-2 my-3 border">
               <div class="mb-3">
                 <label class="form-label">Name</label>
-                <input v-model="form.name" type="text" class="form-control" required />
+                <input
+                  v-model="form.name"
+                  type="text"
+                  placeholder="Harsh Kapoor"
+                  class="form-control"
+                  required
+                />
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Company</label>
-                <input v-model="form.company" type="text" class="form-control" required />
+                <input
+                  v-model="form.company"
+                  type="text"
+                  class="form-control"
+                  placeholder="Ladybird Solutions Pvt Lmt."
+                />
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Contact</label>
-                <input v-model="form.contact" type="text" class="form-control" required />
+                <input
+                  v-model="form.contact"
+                  type="number"
+                  placeholder="+91-0000000000"
+                  class="form-control"
+                  required
+                />
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Budget ($)</label>
-                <input v-model="form.budget" type="number" class="form-control" required />
+                <label class="form-label">$ Budget</label>
+                <input
+                  v-model="form.budget"
+                  type="number"
+                  placeholder="$3000"
+                  class="form-control"
+                  required
+                />
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Status</label>
+                <label class="form-label btn">Status</label>
                 <select v-model="form.status" class="form-select" required>
                   <option value="Pending">Pending</option>
                   <option value="Approved">Approved</option>
