@@ -33,64 +33,56 @@
             </div>
             <!-- table for the task -->
 
-            <form @submit.prevent="submitForm" class="p-3 mx-2 my-3 border">
+            <Form @submit="submitForm" :validation-schema="schema" class="p-3 mx-2 my-3 border">
               <div class="mb-3">
                 <label class="form-label">Name</label>
-                <input
-                  v-model="form.name"
-                  type="text"
-                  placeholder="Harsh Kapoor"
-                  class="form-control"
-                  required
-                />
+                <Field name="name" type="text" class="form-control" placeholder="Harsh Kapoor" />
+                <ErrorMessage name="name" class="text-danger" />
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Company</label>
-                <input
-                  v-model="form.company"
+                <Field
+                  name="company"
                   type="text"
                   class="form-control"
                   placeholder="Ladybird Solutions Pvt Lmt."
                 />
+                <ErrorMessage name="company" class="text-danger" />
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Contact</label>
-                <input
-                  v-model="form.contact"
-                  type="number"
-                  placeholder="+91-0000000000"
+                <Field
+                  name="contact"
+                  type="text"
                   class="form-control"
-                  required
+                  placeholder="+91-0000000000"
                 />
+                <ErrorMessage name="contact" class="text-danger" />
               </div>
 
               <div class="mb-3">
                 <label class="form-label">$ Budget</label>
-                <input
-                  v-model="form.budget"
-                  type="number"
-                  placeholder="$3000"
-                  class="form-control"
-                  required
-                />
+                <Field name="budget" type="number" class="form-control" placeholder="$3000" />
+                <ErrorMessage name="budget" class="text-danger" />
               </div>
 
               <div class="mb-3">
                 <label class="form-label btn">Status</label>
-                <select v-model="form.status" class="form-select" required>
+                <Field name="status" as="select" class="form-select">
                   <option value="Pending">Pending</option>
                   <option value="Approved">Approved</option>
                   <option value="Rejected">Rejected</option>
-                </select>
+                </Field>
+                <ErrorMessage name="status" class="text-danger" />
               </div>
 
               <button type="submit" class="btn btn-primary" :disabled="loading">
                 <span v-if="loading" class="spinner-border spinner-border-sm me-2"></span>
                 Submit
               </button>
-            </form>
+            </Form>
           </div>
           <!-- table for the task -->
           <!-- /.card-body -->
@@ -110,46 +102,46 @@ import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 
-const router = useRouter()
-const form = ref({
-  name: '',
-  company: '',
-  contact: '',
-  budget: '',
-  status: 'Pending',
-})
+// VeeValidate
+import { Form, Field, ErrorMessage, useForm } from 'vee-validate'
+import * as yup from 'yup'
 
+const router = useRouter()
 const loading = ref(false)
 const successMessage = ref('')
 const errorMessage = ref('')
 
-const submitForm = async () => {
+// Validation Schema using Yup
+const schema = yup.object({
+  name: yup.string().required('Name is required'),
+  company: yup.string(),
+  contact: yup
+    .string()
+    .required('Contact is required')
+    .matches(/^\d{10}$/, 'Contact must be 10 digits'),
+  budget: yup.number().required('Budget is required').min(100, 'Budget should be at least $100'),
+  status: yup.string().required('Status is required'),
+})
+
+// Form submit handler
+const submitForm = async (values, { resetForm }) => {
   loading.value = true
   successMessage.value = ''
   errorMessage.value = ''
 
   try {
-    const response = await axios.post(
-      'https://6851a6c58612b47a2c0adbd3.mockapi.io/leads',
-      form.value,
-    )
+    await axios.post('https://6851a6c58612b47a2c0adbd3.mockapi.io/leads', values)
     successMessage.value = 'Task Added Successfully'
     setTimeout(() => {
       successMessage.value = ''
     }, 1500)
 
-    form.value = {
-      name: '',
-      company: '',
-      contact: '',
-      budget: '',
-      status: 'Pending',
-    }
+    resetForm()
   } catch (error) {
     console.error('Error:', error)
     errorMessage.value = 'Something went wrong while Adding the Task.'
     setTimeout(() => {
-      successMessage.value = ''
+      errorMessage.value = ''
     }, 1500)
   } finally {
     loading.value = false
