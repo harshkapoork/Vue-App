@@ -33,7 +33,7 @@
             </div>
             <!-- table for the task -->
 
-            <Form @submit="submitForm" :validation-schema="schema" class="p-3 mx-2 my-3 border">
+            <Form @submit="submitForm" :validation-schema="schema" class="p-3">
               <div class="mb-3">
                 <label class="form-label">Name</label>
                 <Field name="name" type="text" class="form-control" placeholder="Harsh Kapoor" />
@@ -104,6 +104,7 @@ import { useRouter } from 'vue-router'
 
 // VeeValidate
 import { Form, Field, ErrorMessage, useForm } from 'vee-validate'
+import { createLead } from '../Api'
 import * as yup from 'yup'
 
 const router = useRouter()
@@ -130,7 +131,7 @@ const submitForm = async (values, { resetForm }) => {
   errorMessage.value = ''
 
   try {
-    await axios.post('https://6851a6c58612b47a2c0adbd3.mockapi.io/leads', values)
+    /*Post Api for add lead*/ createLead(values)
     successMessage.value = 'Task Added Successfully'
     setTimeout(() => {
       successMessage.value = ''

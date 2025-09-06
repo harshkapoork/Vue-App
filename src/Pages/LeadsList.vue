@@ -27,11 +27,12 @@
             <div class="card-body">
               <div class="table-responsive" style="max-height: 100vh; overflow-y: auto">
                 <table
+                  id="tableData"
                   v-if="tasks.values.length == 0"
-                  class="table table-bordered overflow-auto"
+                  class="table table-striped table-hover table-bordered overflow-auto"
                   style="max-height: 100vh"
                 >
-                  <thead>
+                  <thead class="bg-primary">
                     <tr>
                       <th>UserId</th>
                       <th>Name</th>
@@ -141,19 +142,27 @@ const errorMessage = ref('')
 
 //
 const PageList = 5 //number of col in the table'
+import { fetchLeads, deleteTask } from '../Api'
 //
 const page = ref(PageList)
 const index = ref(0)
 //
 
 //function on render
-onMounted(() => {
-  fetchLeads()
+onMounted(async () => {
+  fetchLeads().then((res) => {
+    try {
+      tasks.value = res
+      isloading.value = false
+    } catch (error) {
+      alert('error while fetching')
+    }
+  })
 })
 //
 
 //fetch leads
-const fetchLeads = async () => {
+const fetchLeads2 = async () => {
   try {
     await axios.get('https://6851a6c58612b47a2c0adbd3.mockapi.io/leads').then((res) => {
       isloading.value = false
@@ -164,7 +173,6 @@ const fetchLeads = async () => {
     alert('error while fetching')
   }
 }
-//
 
 //paging button
 const pagenext = () => {
@@ -195,18 +203,15 @@ const editTask = (e) => {
 //delete task
 
 const handgleDelete = (id) => {
-  deleteTask(id)
-}
-const deleteTask = async (id) => {
   successMessage.value = ''
   errorMessage.value = ''
   try {
-    const response = await axios.delete(`https://6851a6c58612b47a2c0adbd3.mockapi.io/leads/${id}`)
+    deleteTask(id)
     successMessage.value = 'Deleted successfully!'
+    //reload panding
+    window.location.reload()
+    isloading = true
 
-    console.log('Response:', response.data)
-
-    fetchLeads()
     setTimeout(() => {
       successMessage.value = ''
     }, 1200)
@@ -218,5 +223,26 @@ const deleteTask = async (id) => {
     }, 1200)
   }
 }
+// const deleteTask = async (id) => {
+//   successMessage.value = ''
+//   errorMessage.value = ''
+//   try {
+//     const response = await axios.delete(`https://6851a6c58612b47a2c0adbd3.mockapi.io/leads/${id}`)
+//     successMessage.value = 'Deleted successfully!'
+
+//     console.log('Response:', response.data)
+
+//     fetchLeads()
+//     setTimeout(() => {
+//       successMessage.value = ''
+//     }, 1200)
+//   } catch (error) {
+//     console.error('Error:', error)
+//     errorMessage.value = 'Something went wrong while submitting the form.'
+//     setTimeout(() => {
+//       errorMessage.value = ''
+//     }, 1200)
+//   }
+// }
 //
 </script>

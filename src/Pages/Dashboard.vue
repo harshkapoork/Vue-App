@@ -99,7 +99,7 @@
 </template>
 <script setup>
 //import modules
-import axios from 'axios'
+
 import { ref, onMounted } from 'vue'
 //
 
@@ -110,25 +110,21 @@ const panding = ref(0)
 const rejected = ref(0)
 //
 
+import { fetchLeads } from '../Api'
 //function on render
 onMounted(() => {
-  fetchLeads()
-})
-//
-
-//fetch leads
-const fetchLeads = async () => {
   try {
-    await axios.get('https://6851a6c58612b47a2c0adbd3.mockapi.io/leads').then((res) => {
-      total.value = res.data.length
-      completed.value = res.data.filter((item) => item.status === 'Approved').length
-      panding.value = res.data.filter((item) => item.status === 'Pending').length
-      rejected.value = res.data.filter((item) => item.status === 'Rejected').length
+    fetchLeads().then((res) => {
+      total.value = res.length
+      completed.value = res.filter((item) => item.status === 'Approved').length
+      panding.value = res.filter((item) => item.status === 'Pending').length
+      rejected.value = res.filter((item) => item.status === 'Rejected').length
     })
   } catch (error) {
     alert('error while fetching')
   }
-}
+})
+//
 
 //
 </script>

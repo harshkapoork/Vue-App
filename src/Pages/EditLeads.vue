@@ -25,7 +25,7 @@
               :initial-values="form"
               :validation-schema="schema"
               @submit="submitForm"
-              class="p-3 mx-2 my-3 border"
+              class="p-3 border"
             >
               <div class="mb-3">
                 <label class="form-label">Name</label>
@@ -114,12 +114,15 @@ const schema = yup.object({
 })
 
 // Fetch lead data for editing
+import { fetchLeadById } from '../Api'
 onMounted(async () => {
   try {
-    const response = await axios.get(`https://6851a6c58612b47a2c0adbd3.mockapi.io/leads/${taskId}`)
-    form.value = response.data
-    formLoaded.value = true
+    fetchLeadById(taskId).then((res) => {
+      form.value = res
+      formLoaded.value = true
+    })
   } catch (error) {
+    alert('network error')
     console.error('Fetch error:', error)
     errorMessage.value = 'Error loading client data.'
   }

@@ -16,8 +16,7 @@ const PageName = ref('Dashboard')
 let path = ref([''])
 
 watch(
-  () => route.fullPath,
-
+  () => route.path,
   (newPath) => {
     //
     if (newPath === '/') {
