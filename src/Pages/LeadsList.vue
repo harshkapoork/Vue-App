@@ -202,15 +202,15 @@ const editTask = (e) => {
 
 //delete task
 
-const handgleDelete = (id) => {
+const handgleDelete = async (id) => {
   successMessage.value = ''
   errorMessage.value = ''
   try {
-    deleteTask(id)
+    await deleteTask(id)
     successMessage.value = 'Deleted successfully!'
     //reload panding
-    window.location.reload()
-    isloading = true
+    const updatedLeads = await fetchLeads()
+    tasks.value = updatedLeads
 
     setTimeout(() => {
       successMessage.value = ''
